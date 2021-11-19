@@ -1,0 +1,9 @@
+note over browser:
+user click button and browser executes onsubmit event handler
+that pushing new note in notes and renders notes to display
+end note
+
+browser->server: HTTP Post https://studies.cs.helsinki.fi/exampleapp/spa
+
+server-->browser: Response {"message":"note created"}
+
