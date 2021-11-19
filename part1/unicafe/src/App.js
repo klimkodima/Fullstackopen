@@ -4,29 +4,22 @@ const Statistics = (props) => {
 
   if (props.all > 0){
   return(
-    <>
-    <div>
-        <h1>statistics</h1>
-      </div>
-      <div>
+    <table>
+        <tr><h1>statistics</h1></tr>
         <StatisticLine text="good" value={props.good}/>      
         <StatisticLine text="neutral" value={props.neutral}/> 
         <StatisticLine text="bad" value={props.bad}/> 
         <StatisticLine text="all" value={props.all}/> 
         <StatisticLine text="average" value={props.average}/> 
         <StatisticLine text="positive" value={props.positive}/> 
-      </div>
-    </>
+      </table>
   )} else {
     return (
-      <>
-      <div>
-        <h1>statistics</h1>
-      </div>
-      <div>
-        <p>No feedback given</p>
-      </div>
-    </>
+
+      <table>
+      <tr> <h1>statistics</h1> </tr>
+      <tr> <span>No feedback given</span> </tr>
+      </table>
     )
   }
 
@@ -34,7 +27,7 @@ const Statistics = (props) => {
 
 const StatisticLine =(props) => {
   return (
-  <p>{props.text} {props.value}</p>
+  <tr><td>{props.text}</td><td>{props.value}</td> </tr>
   )
 }
 
@@ -53,8 +46,8 @@ const App = () => {
   const addNeutral = () => setNeutral(neutral+1)
   const addBad = () => setBad(bad+1)
   let all = good + neutral + bad
-  let average = (good - bad)/all
-  let positive = good/all*100
+  let average = ((good - bad)/all).toFixed(1)
+  let positive = (good/all*100).toFixed(1) +` %`
 
   return (
     <div>
