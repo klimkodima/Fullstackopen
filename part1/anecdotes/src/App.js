@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 
 const App = () => {
   const anecdotes = [
@@ -15,22 +15,37 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(points)
+  const [maxVotesIndex, setMaxVotesIndex] = useState(0)
   const setRandomValue = () => {
   let newIndex = Math.floor(Math.random()*anecdotes.length)
     setSelected(newIndex)
   }
-  
+
   const addVote = () => {
     const copy = [...votes]
     copy[selected] += 1 
     setVotes(copy)
+    let maxIndex = copy.indexOf( Math.max.apply(null, copy));
+    setMaxVotesIndex(maxIndex)
   }
 
   return (
     <div>
-      <h3>{anecdotes[selected]}</h3>
-      <h3>has {votes[selected]} votes</h3>
+      <div>
+      <h3>Anecdote of the day</h3>
+      <br/>
+      <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
       <div><button onClick={() => addVote()}>vote</button><button onClick={() => setRandomValue()}>next anecdote</button></div>
+      </div>
+      <br/>
+      <br/>
+      <div>
+      <h3>Anecdote of the day</h3>
+      <br/>
+      <p>{anecdotes[maxVotesIndex]}</p>
+      <p>has {votes[maxVotesIndex]} votes</p>
+      </div>
     </div>
   )
 }
