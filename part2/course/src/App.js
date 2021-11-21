@@ -60,7 +60,18 @@ const App = () => {
       <>
       <Header name={course.name}/>
       <Content parts={course.parts}/>
+      <Total  parts={course.parts}/>
       </>
+    )
+  }
+
+  const Total = ({parts}) => {
+    let total = 0
+    parts.forEach(element => {
+      total += element.exercises
+    }); 
+    return (
+    <h4>total of {total} exercises</h4>
     )
   }
 
