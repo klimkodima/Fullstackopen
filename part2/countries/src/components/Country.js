@@ -1,22 +1,9 @@
 import React from "react"
-const Country =({country}) =>{
+
+const Country =({country, showCountry}) =>{
 
     return(
-      <>
-      <h2>{country.name.common}</h2>
-      <br/>
-      <p>{`capital ${country.capital}`}</p>
-      <p>{`population ${country.population}`}</p>
-      <br/>
-      <h3>languages</h3>
-      <br/>
-      <ul>
-          
-      {Object.values(country.languages).map((value) => (
-          <li key={value}>{value}</li>
-        ))}
-      </ul>
-      <img src={country.flags.svg} alt="flag"/>
-      </>)
+      <li>{country.name.common}<button value ={country.name.common} onClick={showCountry}> show</button></li>
+      )
 }
 export default Country
