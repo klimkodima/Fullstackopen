@@ -4,7 +4,6 @@ import Country from "./Country"
 
 const Content =({countries, showCountry}) =>{
  let length = countries.length
- console.log(length)
   if( length > 10){
     return(
       <div>Too many matches, specity another filter</div>

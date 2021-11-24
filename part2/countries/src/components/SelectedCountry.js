@@ -1,5 +1,6 @@
 import React from "react"
 import Language from "./Language"
+import Weather from "./Weather"
 
 const SelectedCountry =({country}) =>{
 
@@ -13,6 +14,7 @@ const SelectedCountry =({country}) =>{
       <h3>languages</h3>
       <Language languages={country.languages}/>
       <img src={country.flags.svg} alt="flag"/>
+      <Weather capital ={country.capital}/>
       </>)
 }
 export default SelectedCountry
