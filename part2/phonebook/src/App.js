@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Filter from "./components/Filter"
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
-import axios from 'axios'
 import phonebookService from "./servises/phonebook"
-
-
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     phonebookService.getAll().then(data => {
@@ -34,21 +33,29 @@ const App = () => {
         
         phonebookService.update( existPersons[0].id, personObject).then( data => {
           setPersons(persons.map(person => person.id !== existPersons[0].id ? person : data))
+          setMessage(`${newName} was update successfully`)
         }).catch(error => {
-          alert("Something went wrong.")
+          setMessage("Something went wrong.")
         })
       }
       setNewName("")
       setNewNumber("")
+      setTimeout(() => {
+        setMessage(null)
+      }, 3000)
       return
     }
     phonebookService.create(personObject).then(data => {
       setPersons(persons.concat(data))
+      setMessage(`${newName} was create successfully`)
     }).catch(error => {
-      alert("Something went wrong.")
+      setMessage("Something went wrong.")
     })
     setNewName("")
     setNewNumber("")
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
   }
 
   const deletePerson = (id, name) => () => {
@@ -57,11 +64,15 @@ const App = () => {
       phonebookService.deletePerson(id).then(
         () => {
           setPersons(persons.filter(n => n.id !== id));
+          setMessage(`${name} was deleted successfully`)
         }
       ).catch(error => {
-        alert("Something went wrong.")
+        setMessage("Something went wrong.")
       })
     }
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
   }
 
   const handlePersonChange = e => setNewName(e.target.value)
@@ -77,6 +88,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message}/>
       <Filter filter={filter} handleFilter={handleFilter} />
       <h3>add a new</h3>
       <PersonForm addPerson={addPerson} handlePersonChange={handlePersonChange} handleNumberChange={handleNumberChange} newName={newName} newNumber={newNumber} />
