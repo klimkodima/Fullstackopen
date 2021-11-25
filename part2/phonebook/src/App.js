@@ -23,16 +23,26 @@ const App = () => {
 
   const addPerson = e => {
     e.preventDefault()
+    const personObject = {
+      name: newName,
+      number: newNumber
+    }
     const existPersons = persons.filter((person) => person.name === newName)
     if (existPersons.length !== 0) {
-      alert(`${newName} is already added to phonebook`)
+      let a = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+      if (a) {
+        
+        phonebookService.update( existPersons[0].id, personObject).then( data => {
+          setPersons(persons.map(person => person.id !== existPersons[0].id ? person : data))
+        }).catch(error => {
+          alert("Something went wrong.")
+        })
+      }
+      setNewName("")
+      setNewNumber("")
       return
     }
-    const postObject = {
-      name: newName,
-      number: newNumber,
-    }
-    phonebookService.create(postObject).then(data => {
+    phonebookService.create(personObject).then(data => {
       setPersons(persons.concat(data))
     }).catch(error => {
       alert("Something went wrong.")
@@ -41,8 +51,7 @@ const App = () => {
     setNewNumber("")
   }
 
-  const deletePerson = (id,name) => {
-    
+  const deletePerson = (id, name) => () => {
     let a = window.confirm(`Are you sure you want to delete ${name}?`);
     if (a) {
       phonebookService.deletePerson(id).then(
@@ -53,7 +62,6 @@ const App = () => {
         alert("Something went wrong.")
       })
     }
-
   }
 
   const handlePersonChange = e => setNewName(e.target.value)
