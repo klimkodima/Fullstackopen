@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [message, setMessage] = useState(null)
+  const [messageClass, setMessageClass] = useState("")
 
   useEffect(() => {
     phonebookService.getAll().then(data => {
@@ -33,8 +34,10 @@ const App = () => {
         
         phonebookService.update( existPersons[0].id, personObject).then( data => {
           setPersons(persons.map(person => person.id !== existPersons[0].id ? person : data))
+          setMessageClass("success")
           setMessage(`${newName} was update successfully`)
         }).catch(error => {
+          setMessageClass("error")
           setMessage("Something went wrong.")
         })
       }
@@ -47,8 +50,10 @@ const App = () => {
     }
     phonebookService.create(personObject).then(data => {
       setPersons(persons.concat(data))
+      setMessageClass("success")
       setMessage(`${newName} was create successfully`)
     }).catch(error => {
+      setMessageClass("error")
       setMessage("Something went wrong.")
     })
     setNewName("")
@@ -64,9 +69,11 @@ const App = () => {
       phonebookService.deletePerson(id).then(
         () => {
           setPersons(persons.filter(n => n.id !== id));
+          setMessageClass("success")
           setMessage(`${name} was deleted successfully`)
         }
       ).catch(error => {
+        setMessageClass("error")
         setMessage("Something went wrong.")
       })
     }
@@ -88,7 +95,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message}/>
+      <Notification message={message} messageClass={messageClass}/>
       <Filter filter={filter} handleFilter={handleFilter} />
       <h3>add a new</h3>
       <PersonForm addPerson={addPerson} handlePersonChange={handlePersonChange} handleNumberChange={handleNumberChange} newName={newName} newNumber={newNumber} />
