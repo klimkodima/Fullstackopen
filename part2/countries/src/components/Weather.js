@@ -14,16 +14,16 @@ const Weather = ({ capital }) => {
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [capital])
-  if (weather === undefined) {
-    return <p>Loading...</p>;
+  if (!weather) {
+    return null;
   } else {
     return (
       <>
         <h2>{`Weather in ${capital}`}</h2>
         <br />
-        <p> <b>temperature</b> {`${weather.current.temperature} Celcius`}</p>
+        <p> <strong>temperature</strong> {`${weather.current.temperature} Celcius`}</p>
         <img src={weather.current.weather_icons} alt={capital} />
-        <p> <b>wind</b>{` ${weather.current.wind_speed} kilometers/hour direction `} <b>{weather.current.wind_dir}</b></p>
+        <p> <strong>wind</strong>{` ${weather.current.wind_speed} kilometers/hour direction  ${weather.current.wind_dir}`}</p>
       </>)
   }
 }
