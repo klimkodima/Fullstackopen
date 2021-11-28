@@ -17,7 +17,7 @@ const App = () => {
     phonebookService.getAll().then(data => {
       setPersons(data)
     }).catch(error => {
-      alert("Something went wrong.")
+      setMessage (error.response.data.error)
     })
   }, [])
 
@@ -38,7 +38,7 @@ const App = () => {
           setMessage(`${newName} was update successfully`)
         }).catch(error => {
           setMessageClass("error")
-          setMessage("Something went wrong.")
+          setMessage (error.response.data.error)
         })
       }
       setNewName("")
@@ -54,7 +54,7 @@ const App = () => {
       setMessage(`${newName} was create successfully`)
     }).catch(error => {
       setMessageClass("error")
-      setMessage("Something went wrong.")
+      setMessage (error.response.data.error);
     })
     setNewName("")
     setNewNumber("")
@@ -74,7 +74,7 @@ const App = () => {
         }
       ).catch(error => {
         setMessageClass("error")
-        setMessage("Something went wrong.")
+        setMessage (error.response.data.error);
       })
     }
     setTimeout(() => {
