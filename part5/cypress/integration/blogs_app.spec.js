@@ -95,6 +95,8 @@ describe('Blog app', function() {
         cy.get(':nth-child(2) > div > [data-testid="handleViewBtn"]').click()
         cy.get('#addLikeBtn').click()
         cy.get('[data-testid="likes"]').should('contain', 'likes 1')
+        cy.get(':nth-child(2) > div > [data-testid="handleViewBtn"]').click()
+        cy.get(':nth-child(2) > [data-testid="likes"]').should('contain', 'likes 0')
       })
     })
   })
