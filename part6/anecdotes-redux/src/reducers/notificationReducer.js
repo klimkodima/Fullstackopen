@@ -15,6 +15,7 @@ export const setNotification = (message, time) => {
       type: 'SHOW',
       data: message
     })
+    clearTimeout()
     setTimeout(() => {
       dispatch({
         type: 'HIDE'
