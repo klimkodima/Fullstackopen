@@ -24,7 +24,7 @@ const BlogForm =() => {
     }
     dispatch(createBlog(newBlog))
     blogFormRef.current.toggleVisibility()
-    dispatch(setNotification(`a new blog ${newBlog.title} by ${newBlog.author}`, 'success'))
+    dispatch(setNotification(`a new blog ${newBlog.title} by ${newBlog.author}`))
     titleReset()
     authorReset()
     urlReset()

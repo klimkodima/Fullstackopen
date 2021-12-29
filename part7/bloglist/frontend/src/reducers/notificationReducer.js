@@ -9,7 +9,7 @@ const reducer = (state = { message:null, className:null }, action) => {
   }
 }
 
-export const setNotification = (message, className) => {
+export const setNotification = (message, className='success') => {
   return async dispatch => {
     dispatch({
       type: 'SHOW',

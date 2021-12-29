@@ -19,7 +19,7 @@ const LoginForm =() => {
       username: username.value
       , password: password.value
     }))
-    dispatch(setNotification(`${username.value} was logged successfully`, 'success'))
+    dispatch(setNotification(`${username.value} was logged successfully`))
     usernameReset()
     passwordReset()
   }

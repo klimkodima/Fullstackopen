@@ -27,14 +27,14 @@ const Blog = () => {
   const addLike = async () => {
     let { id, ...rest } = { ...blog, likes:blog.likes + 1, user:blog.user.id }
     dispatch(vote(id, rest))
-    dispatch(setNotification(`a updated blog ${blog.title} by ${blog.author}`, 'success'))
+    dispatch(setNotification(`a updated blog ${blog.title} by ${blog.author}`))
   }
 
   const handleDeleteBlog = async () => {
     let confirmation = window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)
     if(confirmation) {
       dispatch(deleteBlog(blog.id))
-      dispatch(setNotification('blog deleted successfully', 'success'))
+      dispatch(setNotification('blog deleted successfully'))
       navigate('/')
     }
   }
@@ -45,7 +45,7 @@ const Blog = () => {
       comment:comment.value
     }
     dispatch(addComment(blog.id, newComment))
-    dispatch(setNotification('comment was added successfuly', 'success'))
+    dispatch(setNotification('comment was added successfuly'))
     commentReset()
 
   }
