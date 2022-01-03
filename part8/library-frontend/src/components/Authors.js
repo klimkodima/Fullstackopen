@@ -7,7 +7,6 @@ const Authors = ({show, setError}) => {
   const result = useQuery(ALL_AUTHORS)
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
-
   const [ updateAuthor ] = useMutation(UPDATE_AUTHOR, {
     refetchQueries: [  {query: ALL_AUTHORS } ],
     onError: (error) => {
@@ -45,7 +44,7 @@ const Authors = ({show, setError}) => {
       <table>
         <tbody>
           <tr>
-            <th></th>
+            <th>name</th>
             <th>
               born
             </th>
@@ -75,7 +74,7 @@ const Authors = ({show, setError}) => {
         <div>
           born
           <input
-            value={born}
+            value={born} type='number'
             onChange={({ target }) => setBorn(target.value)}
           />
         </div>
